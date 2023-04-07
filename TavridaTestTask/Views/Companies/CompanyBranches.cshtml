@@ -1,0 +1,53 @@
+﻿@model IEnumerable<TavridaTestTask.Models.ViewModels.CompanyBranchViewModel>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Филиалы Компаний</title>
+</head>
+<body>
+    <h1>Филиалы Компаний</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.CompanyBranchName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CompanyName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CompanyGroup)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.RelatedBranches)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CompanyBranchName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CompanyName)
+                    </td>
+                    <td>
+                        @{ 
+                            var group = item.CompanyGroup ? 2 : 1;
+                        }
+                        @(group)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RelatedBranches)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>
