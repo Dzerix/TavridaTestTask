@@ -32,7 +32,7 @@ namespace TavridaTestTask.Controllers
                                     };
             return CompaniesBranches != null ?
                           View(await CompaniesBranches.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.Notices'  is null.");
+                          Problem("Entity set 'CompaniesBranches'  is null.");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
