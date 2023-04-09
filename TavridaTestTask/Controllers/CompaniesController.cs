@@ -20,14 +20,13 @@ namespace TavridaTestTask.Controllers
         public async Task<IActionResult> CompanyBranches()
         {
             var CompaniesBranches = from cb in _context.CompaniesBranches
-                                    join c in _context.Companies on cb.CompanyId equals c.Id
                                     select new CompanyBranchViewModel()
                                     {
                                         CompanyBranchName = cb.Name,
-                                        CompanyName = c.Name,
-                                        CompanyGroup = c.BinarySign,
-                                        RelatedBranches = !c.BinarySign ?
-                                            string.Join(", ", _context.CompaniesBranches.Where(x => x.CompanyId == c.Id).Select(x => x.Name)) :
+                                        CompanyName = cb.Company.Name,
+                                        CompanyGroup = cb.Company.BinarySign,
+                                        RelatedBranches = !cb.Company.BinarySign ?
+                                            string.Join(", ", _context.CompaniesBranches.Where(x => x.CompanyId == cb.Company.Id).Select(x => x.Name)) :
                                             string.Join(", ", _context.CompaniesBranches.Select(x => x.Name))
                                     };
             return CompaniesBranches != null ?
