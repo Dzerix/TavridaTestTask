@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
+using System.Text;
 using TavridaTestTask.Models;
 using TavridaTestTask.Models.ViewModels;
 
@@ -26,7 +27,7 @@ namespace TavridaTestTask.Controllers
                                         CompanyName = cb.Company.Name,
                                         CompanyGroup = cb.Company.BinarySign,
                                         RelatedBranches = !cb.Company.BinarySign ?
-                                            string.Join(", ", _context.CompaniesBranches.Where(x => x.CompanyId == cb.Company.Id).Select(x => x.Name)) :
+                                            new StringBuilder().AppendJoin(", ", cb.Company.CompaniesBranches.Select(x => x.Name.ToString())).ToString():
                                             string.Join(", ", _context.CompaniesBranches.Select(x => x.Name))
                                     };
             return CompaniesBranches != null ?
